@@ -37,12 +37,13 @@ jobs:
 
       - name: Install ArgoCD CLI
         run: |
-          brew install argocd
-
+          sudo curl -sSL -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
+          sudo chmod +x /usr/local/bin/argocd
 
       - name: Check ArgoCD Version
         run: |
           argocd version
+
       - name: Login to ArgoCD 
         env:
           ARGOCD_SERVER: ${{ secrets.ARGOCD_SERVER }}
@@ -51,7 +52,20 @@ jobs:
         run: |
           argocd login $ARGOCD_SERVER --username $ARGOCD_USERNAME --password $ARGOCD_PASSWORD --insecure
 
+      - name: Create Argo CD Namespace
+        run: |
+          kubectl create namespace argocd
+
+      - name: Apply Argo CD manifests
+        run: |
+          kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
+      - name: Wait for Argo CD to be ready
+        run: |
+          kubectl wait --for=condition=Available deployment -n argocd --timeout=300s -l app.kubernetes.io/name=argocd-server
+
       - name: Sync ArgoCD Application
         run: |
-          argocd app sync helm-app-using-terraform  # Remplacez helm-app-using-terraform par le nom de votre application ArgoCD
-          argocd app wait helm-app-using-terraform
+          argocd app sync helm-app-using-terraform  # Replace 'helm-app-using-terraform' with your Argo CD application name
+          argocd app wait helm-app-using-terraform --timeout 300
+
