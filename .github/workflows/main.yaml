@@ -37,8 +37,8 @@ jobs:
 
       - name: Install ArgoCD CLI
         run: |
-          kubectl create namespace argocd
-          kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+          sudo curl -sSL -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/download/v2.6.7/argocd-linux-amd64
+          sudo chmod +x /usr/local/bin/argocd
 
       - name: Login to ArgoCD
         env:
