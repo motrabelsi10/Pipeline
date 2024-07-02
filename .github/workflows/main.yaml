@@ -41,8 +41,8 @@ jobs:
           sudo chmod +x /usr/local/bin/argocd
 
       - name: Check ArgoCD Version
-        run: |
-          argocd version ${{ secrets.SERVER }}
+        run:
+          - argocd version ${{ secrets.SERVER }}
       - name: Login to ArgoCD 
         env:
           ARGOCD_SERVER: ${{ secrets.ARGOCD_SERVER }}
