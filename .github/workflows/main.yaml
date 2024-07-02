@@ -35,11 +35,6 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/testpipeline:v1
 
-      - name: Install ArgoCD CLI
-        run: |
-          sudo curl -sSL -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/download/v2.6.7/argocd-linux-amd64
-          sudo chmod +x /usr/local/bin/argocd
-
       - name: Login to ArgoCD
         env:
           ARGOCD_SERVER: ${{ secrets.ARGOCD_SERVER }}
