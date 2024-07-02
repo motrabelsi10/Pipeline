@@ -40,10 +40,6 @@ jobs:
           sudo curl -sSL -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
           sudo chmod +x /usr/local/bin/argocd
 
-      - name: Check ArgoCD Version
-        run: |
-          argocd version
-
       - name: Login to ArgoCD 
         env:
           ARGOCD_SERVER: ${{ secrets.ARGOCD_SERVER }}
