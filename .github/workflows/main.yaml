@@ -42,7 +42,8 @@ jobs:
 
       - name: Debug - ArgoCD Version
         run: |
-          argocd version
+          argocd version --server $ARGOCD_SERVER --username $ARGOCD_USERNAME --password $ARGOCD_PASSWORD
+
 
       - name: Login to ArgoCD
         env:
