@@ -37,8 +37,8 @@ jobs:
 
       - name: Install ArgoCD CLI
         run: |
-          sudo curl -sSL -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
-          sudo chmod +x /usr/local/bin/argocd
+          brew install argocd
+
 
       - name: Check ArgoCD Version
         run: |
