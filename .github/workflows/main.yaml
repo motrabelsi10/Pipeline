@@ -42,9 +42,9 @@ jobs:
 
       - name: Check ArgoCD Version
         run: |
-          argocd version
+          argocd version ${{ secrets.ARGOCD_SERVER }}
 
-      - name: Login to ArgoCD
+      - name: Login to ArgoCD 
         env:
           ARGOCD_SERVER: ${{ secrets.ARGOCD_SERVER }}
           ARGOCD_USERNAME: ${{ secrets.ARGOCD_USERNAME }}
