@@ -42,7 +42,7 @@ jobs:
 
       - name: Check ArgoCD Version
         run: |
-          argocd version --server $ARGOCD_SERVER --username $ARGOCD_USERNAME --password "$ARGOCD_PASSWORD"
+          argocd version --server $ARGOCD_SERVER --username $ARGOCD_USERNAME --password $ARGOCD_PASSWORD
         env:
           ARGOCD_SERVER: ${{ secrets.ARGOCD_SERVER }}
           ARGOCD_USERNAME: ${{ secrets.ARGOCD_USERNAME }}
