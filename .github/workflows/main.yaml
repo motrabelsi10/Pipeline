@@ -35,15 +35,15 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/testpipeline:v1
       
-      - name: List files in mychart directory
-        run: ls -l pipeline/mychart
+      - name: List all files in stage/pipeline
+        run: ls -l stage/pipeline
 
       - name: Update values.yaml
         run: |
-          sed -i 's/tag: ".*"/tag: "v1"/' pipeline/mychart/values.yaml
+          sed -i 's/tag: ".*"/tag: "v1"/' stage/pipeline/mychart/values.yaml
           git config --global user.name 'motrabelsi10'
           git config --global user.email 'trabelsi.mohamed.1@esprit.tn'
-          git add pipeline/mychart/values.yaml
+          git add stage/pipeline/mychart/values.yaml
           git commit -m "Update image tag to v1"
           git push
         env:
