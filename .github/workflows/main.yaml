@@ -34,5 +34,16 @@ jobs:
           dockerfile: Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/testpipeline:v1
+      
+      - name: Update Helm Chart Values
+        run: |
+          sed -i 's/tag: ".*"/tag: "v1"/' ../../../mychart/values.yaml
+          git config --global user.name 'motrabelsi10'
+          git config --global user.email 'trabelsi.mohamed.1@esprit.tn'
+          git add ../../../mychart/values.yaml
+          git commit -m "Update image tag to v1"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 
