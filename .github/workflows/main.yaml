@@ -35,7 +35,10 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/testpipeline:v1
       
-      - name: Update Helm Chart Values
+      - name: List files in mychart directory
+        run: ls -l pipeline/mychart
+
+      - name: Update values.yaml
         run: |
           sed -i 's/tag: ".*"/tag: "v1"/' pipeline/mychart/values.yaml
           git config --global user.name 'motrabelsi10'
