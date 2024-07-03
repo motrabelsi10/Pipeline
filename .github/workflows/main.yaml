@@ -37,10 +37,10 @@ jobs:
       
       - name: Update Helm Chart Values
         run: |
-          sed -i 's/tag: ".*"/tag: "v1"/' ../../pipeline/mychart/values.yaml
+          sed -i 's/tag: ".*"/tag: "v1"/' ../mychart/values.yaml
           git config --global user.name 'motrabelsi10'
           git config --global user.email 'trabelsi.mohamed.1@esprit.tn'
-          git add ../../pipeline/mychart/values.yaml
+          git add ../mychart/values.yaml
           git commit -m "Update image tag to v1"
           git push
         env:
